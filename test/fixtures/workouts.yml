@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  date: 2023-05-23
+  exercise_ids: MyString
+  sets: 1
+  reps: 1
+  weight: 1.5
+  duration: 1
+  notes: MyText
+
+two:
+  user_id: 1
+  date: 2023-05-23
+  exercise_ids: MyString
+  sets: 1
+  reps: 1
+  weight: 1.5
+  duration: 1
+  notes: MyText
