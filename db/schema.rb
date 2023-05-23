@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_223829) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_224226) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -35,6 +35,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_223829) do
     t.string "name"
     t.text "description"
     t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "exercise_id"
+    t.date "date"
+    t.integer "reps"
+    t.float "weight_lifted"
+    t.float "one_rep_max"
+    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
