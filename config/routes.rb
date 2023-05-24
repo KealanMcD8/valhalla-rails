@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   # delete 'logout', to: 'sessions#destroy'
   get 'logout', to: 'sessions#destroy'
+  resources :users do
+    resource :progress, only: [:show, :edit, :update]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
