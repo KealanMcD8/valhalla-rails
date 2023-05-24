@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_224226) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_010937) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -54,7 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_224226) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
     t.string "profile_picture"
     t.string "gender"
     t.integer "age"
@@ -63,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_224226) do
     t.string "fitness_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "workout_sets", force: :cascade do |t|
