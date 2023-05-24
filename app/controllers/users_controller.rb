@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?, only: [:show]
+  # before_action :set_user, only: [:show, :edit, :update, :destroy]
   # before_action :require_user, only: [:edit, :update]
   # before_action :require_same_user, only: [:edit, :update, :destroy]
+  # before_action :logged_in_user, only: [:show]
 
   def show
   end
@@ -17,10 +19,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "Welcome to Valhalla #{@user.name}"
-      redirect_to @user, notice: 'User was successfully created.'
+      log_in @user
+      flash[:success] = "Welcome to Valhalla #{@user.name}"
+      redirect_to @user
     else
-      redirect_to :back
+      render 'new'
     end
   end
 
@@ -51,12 +54,5 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def require_same_user
-    if current_user != @user
-      flash[:alert] = "You can only edit your own account"
-      redirect_to @user
-    end
   end
 end

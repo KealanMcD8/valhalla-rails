@@ -1,4 +1,6 @@
 <%= form_with(model: @user) do |form| %>
+  <%= render 'shared/error_messages' %>
+
   <%= form.label :name %>
   <%= form.text_field :name, class: 'form-control' %>
 
@@ -30,5 +32,5 @@
   <%= form.label :password_confirmation %>
   <%= form.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= form.submit 'Create User', class: 'btn btn-primary' %>
+  <%= form.submit(@user.new_record? ? "Sign up" : "Update account") %>
 <% end %>
