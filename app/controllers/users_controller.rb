@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
   before_action :logged_in?, only: [:show]
-  # before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # before_action :require_user, only: [:edit, :update]
-  # before_action :require_same_user, only: [:edit, :update, :destroy]
-  # before_action :logged_in_user, only: [:show]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show
   end
@@ -54,5 +53,12 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:alert] = "You can only edit your own account"
+      redirect_to @user
+    end
   end
 end
