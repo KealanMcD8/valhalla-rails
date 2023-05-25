@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_234820) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_002331) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_234820) do
 
   create_table "progresses", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "workout_id", null: false
+    t.integer "workout_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_progresses_on_user_id"
@@ -83,10 +83,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_234820) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "exercise_id"
+    t.integer "progress_id"
     t.index ["exercise_id"], name: "index_workouts_on_exercise_id"
+    t.index ["progress_id"], name: "index_workouts_on_progress_id"
   end
 
   add_foreign_key "progresses", "users"
   add_foreign_key "progresses", "workouts"
   add_foreign_key "workouts", "exercises"
+  add_foreign_key "workouts", "progresses"
 end

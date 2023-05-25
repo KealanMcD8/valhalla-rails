@@ -3,10 +3,24 @@ class ProgressesController < ApplicationController
 
   def show
     @progress = @user.progress
+    @workouts = @progress.workouts if @progress.workout_id.present?
   end
 
-  def edit
-    @progress = @user.progress
+  def index
+    @progresses = Progress.all
+  end
+
+  def new
+    @progress = Progress.new
+  end
+
+  def create
+    @progress = Progress.new(progress_params)
+    if @progress.save
+      redirect_to @progress, notice: 'Progress was successfully created.'
+    else
+      render :new
+    end
   end
 
   def update
@@ -26,6 +40,6 @@ class ProgressesController < ApplicationController
   end
 
   def progress_params
-    params.require(:progress).permit(:reps, :weight_lifted, :one_rep_max, :notes)
+    params.require(:progress).permit(:user_id, :workout_id)
   end
 end
