@@ -4,14 +4,13 @@
   <%= form.label :duration %>
   <%= form.text_field :duration %>
 
-  <%= form.label :reps %>
-  <%= form.text_field :reps %>
-
-  <%= form.label :weight %>
-  <%= form.text_field :weight %>
-
   <%= form.label :notes %>
   <%= form.text_area :notes %>
+
+  <%= form.fields_for :workout_exercises do |we_form| %>
+    <%= we_form.label :exercise_id, "Exercise" %>
+    <%= we_form.collection_select :exercise_id, Exercise.all, :id, :name, prompt: "Select an exercise" %>
+    <% end %>
 
   <%= form.submit "Create Workout" %>
 <% end %>

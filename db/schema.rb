@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_003455) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_003725) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -62,6 +62,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_003455) do
     t.string "password_digest"
   end
 
+  create_table "workout_exercises", force: :cascade do |t|
+    t.integer "workout_id"
+    t.integer "exercise_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "workout_sets", force: :cascade do |t|
     t.integer "workout_id"
     t.integer "exercise_id"
@@ -87,6 +94,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_003455) do
 
   add_foreign_key "progresses", "users"
   add_foreign_key "progresses", "workouts"
+  add_foreign_key "workout_exercises", "exercises"
+  add_foreign_key "workout_exercises", "workouts"
   add_foreign_key "workouts", "exercises"
   add_foreign_key "workouts", "progresses"
 end
