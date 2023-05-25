@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   resources :progresses do
     resources :workouts, only: [:new, :create]
   end
+  Rails.application.routes.draw do
+    resources :exercises, only: [:new, :create, :destroy, :index]
+  end
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

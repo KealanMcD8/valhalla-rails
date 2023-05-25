@@ -20,6 +20,5 @@ class WorkoutsController < ApplicationController
 
   def workout_params
     params.require(:workout).permit(:duration, :notes, workout_exercises_attributes: [:exercise_id])
-          .transform_values { |value| value.to_i if value.match?(/^\d+$/) }
   end
 end
