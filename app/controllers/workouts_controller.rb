@@ -10,7 +10,7 @@ class WorkoutsController < ApplicationController
     @workout = @progress.workouts.build(workout_params)
 
     if @workout.save
-      redirect_to progress_workout_path(@progress, @workout)
+      redirect_to @progress, notice: 'Workout was successfully created.'
     else
       render :new
     end
@@ -19,6 +19,7 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout).permit(:duration, :notes, workout_exercises_attributes: [:id, :exercise_id])
+    params.require(:workout).permit(:duration, :notes, workout_exercises_attributes: [:exercise_id])
+          .transform_values { |value| value.to_i if value.match?(/^\d+$/) }
   end
 end
