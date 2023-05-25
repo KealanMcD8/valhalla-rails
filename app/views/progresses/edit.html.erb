@@ -1,0 +1,27 @@
+<h1>Edit Progress</h1>
+
+<%= form_with(model: [@user, @progress], url: user_progress_path(@user), method: :patch) do |f| %>
+  <div>
+    <%= f.label :reps %>
+    <%= f.number_field :reps %>
+  </div>
+
+  <div>
+    <%= f.label :weight_lifted %>
+    <%= f.number_field :weight_lifted %>
+  </div>
+
+  <div>
+    <%= f.label :one_rep_max %>
+    <%= f.number_field :one_rep_max %>
+  </div>
+
+  <div>
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div>
+    <%= f.submit "Update Progress" %>
+  </div>
+<% end %>

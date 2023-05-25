@@ -1,4 +1,4 @@
 class Progress < ApplicationRecord
   belongs_to :user
-  has_many :exercises, through: :user
+  has_many :workouts
 end

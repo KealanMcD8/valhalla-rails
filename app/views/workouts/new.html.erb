@@ -1,0 +1,15 @@
+<h1>Create Workout</h1>
+
+<%= form_with(model: [@progress, @workout], url: progress_workouts_path(@progress)) do |form| %>
+  <%= form.label :duration %>
+  <%= form.number_field :duration %>
+  <%= form.label :notes %>
+  <%= form.text_area :notes %>
+
+  <%= form.fields_for :workout_exercises, [@workout.workout_exercises.build] do |we_form| %>
+    <%= we_form.label :exercise_id, "Exercise" %>
+    <%= we_form.collection_select :exercise_id, Exercise.all, :id, :name, prompt: "Select an exercise" %>
+  <% end %>
+
+  <%= form.submit "Create Workout" %>
+<% end %>

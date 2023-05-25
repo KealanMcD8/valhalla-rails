@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_010937) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_003725) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -40,15 +40,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_010937) do
   end
 
   create_table "progresses", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "exercise_id"
-    t.date "date"
-    t.integer "reps"
-    t.float "weight_lifted"
-    t.float "one_rep_max"
-    t.text "notes"
+    t.integer "user_id", null: false
+    t.integer "workout_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_progresses_on_user_id"
+    t.index ["workout_id"], name: "index_progresses_on_workout_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,6 +62,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_010937) do
     t.string "password_digest"
   end
 
+  create_table "workout_exercises", force: :cascade do |t|
+    t.integer "workout_id"
+    t.integer "exercise_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "workout_sets", force: :cascade do |t|
     t.integer "workout_id"
     t.integer "exercise_id"
@@ -78,13 +82,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_010937) do
     t.integer "user_id"
     t.date "date"
     t.string "exercise_ids"
-    t.integer "sets"
-    t.integer "reps"
-    t.float "weight"
     t.integer "duration"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "exercise_id"
+    t.integer "progress_id"
+    t.index ["exercise_id"], name: "index_workouts_on_exercise_id"
+    t.index ["progress_id"], name: "index_workouts_on_progress_id"
   end
 
+  add_foreign_key "progresses", "users"
+  add_foreign_key "progresses", "workouts"
+  add_foreign_key "workout_exercises", "exercises"
+  add_foreign_key "workout_exercises", "workouts"
+  add_foreign_key "workouts", "exercises"
+  add_foreign_key "workouts", "progresses"
 end

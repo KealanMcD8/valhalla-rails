@@ -1,0 +1,26 @@
+<h1>Create Exercise</h1>
+
+<%= form_with(model: @exercise, url: exercises_path) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :muscle_group %>
+  <%= form.text_field :muscle_group %>
+
+  <%= form.label :equipment_needed %>
+  <%= form.text_field :equipment_needed %>
+
+  <%= form.label :image_url %>
+  <%= form.text_field :image_url %>
+
+  <%= form.label :video_url %>
+  <%= form.text_field :video_url %>
+
+  <%= form.label :instructions %>
+  <%= form.text_area :instructions %>
+
+  <%= form.submit "Create Exercise" %>
+<% end %>

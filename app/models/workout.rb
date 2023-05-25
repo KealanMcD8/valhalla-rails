@@ -1,4 +1,7 @@
 class Workout < ApplicationRecord
-  belongs_to :user
-  has_many :exercises
+  has_many :progresses
+  has_many :users, through: :progresses
+  has_many :workout_exercises, dependent: :destroy
+  accepts_nested_attributes_for :workout_exercises, allow_destroy: true
+  has_many :exercises, through: :workout_exercises
 end
