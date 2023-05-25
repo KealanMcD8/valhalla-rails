@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'workouts/new'
+  get 'workouts/create'
   get 'home/index'
   root 'home#index'
   get 'signup', to: 'users#new'
@@ -9,6 +11,9 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   resources :users do
     resource :progress, only: [:show, :edit, :update]
+  end
+  resources :progresses do
+    resources :workouts, only: [:new, :create]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
