@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_003725) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_233537) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "equipment_exercises", id: false, force: :cascade do |t|
+    t.integer "equipment_id", null: false
+    t.integer "exercise_id", null: false
+    t.index ["equipment_id", "exercise_id"], name: "index_equipment_exercises_on_equipment_id_and_exercise_id"
+    t.index ["exercise_id", "equipment_id"], name: "index_equipment_exercises_on_exercise_id_and_equipment_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -29,6 +36,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_003725) do
     t.text "instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "exercises_muscle_groups", id: false, force: :cascade do |t|
+    t.integer "exercise_id"
+    t.integer "muscle_group_id"
+    t.index ["exercise_id", "muscle_group_id"], name: "index_exercises_muscle_groups_on_exercise_id_and_muscle_group_id", unique: true
+    t.index ["exercise_id"], name: "index_exercises_muscle_groups_on_exercise_id"
+    t.index ["muscle_group_id"], name: "index_exercises_muscle_groups_on_muscle_group_id"
   end
 
   create_table "muscle_groups", force: :cascade do |t|
