@@ -1,3 +1,4 @@
 class Equipment < ApplicationRecord
-  has_and_belongs_to_many :exercises
+  has_many :exercise_equipments, dependent: :destroy
+  has_many :exercises, through: :exercise_equipments
 end

@@ -1,5 +1,3 @@
-<h1>Create Exercise</h1>
-
 <%= form_with(model: @exercise, url: exercises_path) do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
@@ -7,11 +5,14 @@
   <%= form.label :description %>
   <%= form.text_area :description %>
 
-  <%= form.label :muscle_group %>
-  <%= form.text_field :muscle_group %>
+  <%= form.label :primary_muscle_group_id, "Primary Muscle Group" %>
+  <%= form.collection_select :primary_muscle_group_id, MuscleGroup.all, :id, :name, prompt: "Select a primary muscle group" %>
 
-  <%= form.label :equipment_needed %>
-  <%= form.text_field :equipment_needed %>
+  <%= form.label :secondary_muscle_group_ids, "Secondary Muscle Groups" %>
+  <%= form.collection_select :secondary_muscle_group_ids, MuscleGroup.all, :id, :name, { prompt: "Select secondary muscle groups" }, { multiple: true } %>
+
+  <%= form.label :equipment_ids, "Equipment" %>
+  <%= form.collection_select :equipment_ids, Equipment.all, :id, :name, { prompt: "Select equipment" }, { multiple: true } %>
 
   <%= form.label :image_url %>
   <%= form.text_field :image_url %>
