@@ -15,4 +15,7 @@ class Exercise < ApplicationRecord
   has_many :equipment_exercises, through: :exercise_equipments, source: :equipment
 
   accepts_nested_attributes_for :exercise_equipments
+
+  # Add the following line to include the primary_muscle_group_id attribute
+  attribute :primary_muscle_group_id, :integer
 end

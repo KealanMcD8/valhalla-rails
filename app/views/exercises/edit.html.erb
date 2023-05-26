@@ -1,4 +1,6 @@
-<%= form_with(model: @exercise, url: exercises_path, class: "form") do |form| %>
+<h2>Edit Exercise</h2>
+
+<%= form_with(model: @exercise, url: exercise_path(@exercise), method: :patch, class: "form") do |form| %>
   <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control" %>
@@ -51,5 +53,5 @@
     <%= form.text_area :instructions, class: "form-control" %>
   </div>
 
-  <%= form.submit "Create Exercise", class: "btn btn-primary" %>
+  <%= form.submit "Update Exercise", class: "btn btn-primary" %>
 <% end %>
