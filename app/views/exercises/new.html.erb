@@ -5,10 +5,13 @@
   <%= form.label :description %>
   <%= form.text_area :description %>
 
-  <%= form.label :muscle_group %>
-  <%= form.collection_select :muscle_group_id, MuscleGroup.all, :id, :name, prompt: "Select a muscle group" %>
+  <%= form.label :primary_muscle_group_id, "Primary Muscle Group" %>
+  <%= form.collection_select :primary_muscle_group_id, MuscleGroup.all, :id, :name, prompt: "Select a primary muscle group" %>
 
-  <%= form.label :equipment_needed %>
+  <%= form.label :secondary_muscle_group_ids, "Secondary Muscle Groups" %>
+  <%= form.collection_select :secondary_muscle_group_ids, MuscleGroup.all, :id, :name, { prompt: "Select secondary muscle groups" }, { multiple: true } %>
+
+  <%= form.label :equipment_ids, "Equipment" %>
   <%= form.collection_select :equipment_ids, Equipment.all, :id, :name, { prompt: "Select equipment" }, { multiple: true } %>
 
   <%= form.label :image_url %>
