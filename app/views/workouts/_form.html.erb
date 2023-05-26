@@ -25,8 +25,8 @@
 
   <%= form.fields_for :workout_sets do |workout_set_form| %>
     <div class="field">
-      <%= workout_set_form.label :exercise_id, "Exercise" %>
-      <%= workout_set_form.collection_select :exercise_id, Exercise.all, :id, :name, prompt: true %>
+      <%= workout_set_form.label :workout_exercise_id, "Exercise" %>
+      <%= workout_set_form.collection_select :workout_exercise_id, Exercise.all, :id, :name, prompt: true %>
     </div>
 
     <div class="field">
