@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #   resources :exercises, only: [:new, :create, :destroy, :index]
   # end
   resources :exercises
+  resources :equipments
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
