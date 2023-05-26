@@ -1,27 +1,43 @@
-<%= form_with(model: @exercise, url: exercises_path) do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+<%= form_with(model: @exercise, url: exercises_path, class: "form") do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
 
-  <%= form.label :description %>
-  <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
 
-  <%= form.label :primary_muscle_group_id, "Primary Muscle Group" %>
-  <%= form.collection_select :primary_muscle_group_id, MuscleGroup.all, :id, :name, prompt: "Select a primary muscle group" %>
+  <div class="form-group">
+    <%= form.label :primary_muscle_group_id, "Primary Muscle Group" %>
+    <%= form.collection_select :primary_muscle_group_id, MuscleGroup.all, :id, :name, { prompt: "Select a primary muscle group" }, { class: "form-control" } %>
+  </div>
 
-  <%= form.label :secondary_muscle_group_ids, "Secondary Muscle Groups" %>
-  <%= form.collection_select :secondary_muscle_group_ids, MuscleGroup.all, :id, :name, { prompt: "Select secondary muscle groups" }, { multiple: true } %>
+  <div class="form-group">
+    <%= form.label :secondary_muscle_group_ids, "Secondary Muscle Groups" %>
+    <%= form.collection_select :secondary_muscle_group_ids, MuscleGroup.all, :id, :name, { prompt: "Select secondary muscle groups" }, { multiple: true, class: "form-control" } %>
+  </div>
 
-  <%= form.label :equipment_ids, "Equipment" %>
-  <%= form.collection_select :equipment_ids, Equipment.all, :id, :name, { prompt: "Select equipment" }, { multiple: true } %>
+  <div class="form-group">
+    <%= form.label :equipment_ids, "Equipment" %>
+    <%= form.collection_select :equipment_ids, Equipment.all, :id, :name, { prompt: "Select equipment" }, { multiple: true, class: "form-control" } %>
+  </div>
 
-  <%= form.label :image_url %>
-  <%= form.text_field :image_url %>
+  <div class="form-group">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url, class: "form-control" %>
+  </div>
 
-  <%= form.label :video_url %>
-  <%= form.text_field :video_url %>
+  <div class="form-group">
+    <%= form.label :video_url %>
+    <%= form.text_field :video_url, class: "form-control" %>
+  </div>
 
-  <%= form.label :instructions %>
-  <%= form.text_area :instructions %>
+  <div class="form-group">
+    <%= form.label :instructions %>
+    <%= form.text_area :instructions, class: "form-control" %>
+  </div>
 
-  <%= form.submit "Create Exercise" %>
+  <%= form.submit "Create Exercise", class: "btn btn-primary" %>
 <% end %>
