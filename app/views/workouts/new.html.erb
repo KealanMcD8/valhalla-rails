@@ -1,6 +1,31 @@
 <h1>Create Workout</h1>
 
-<%= render 'form' %>
+<%= form_with(model: [@user, @workout], url: user_workouts_path(@user), method: :post) do |form| %>
+  <!-- Workout fields -->
+  <%= form.label :date %>
+  <%= form.date_field :date %>
+
+  <!-- WorkoutExercise fields -->
+  <%= form.fields_for :workout_exercises do |we_form| %>
+    <%= we_form.label :exercise %>
+    <%= we_form.collection_select :exercise_id, Exercise.all, :id, :name %>
+
+    <!-- WorkoutSet fields -->
+    <%= we_form.fields_for :workout_sets do |ws_form| %>
+      <%= ws_form.label :reps %>
+      <%= ws_form.number_field :reps %>
+
+      <%= ws_form.label :weight %>
+      <%= ws_form.number_field :weight %>
+
+      <%= ws_form.label :rest_time %>
+      <%= ws_form.number_field :rest_time %>
+    <% end %>
+  <% end %>
+
+  <!-- Submit button -->
+  <%= form.submit 'Create Workout' %>
+<% end %>
 
 <p>
   <%= link_to 'Back', user_workouts_path(@user) %>

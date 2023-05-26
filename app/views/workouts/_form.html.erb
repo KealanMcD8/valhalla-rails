@@ -21,6 +21,26 @@
     <%= form.number_field :duration %>
   </div>
 
+
+
+  <%= form.fields_for :workout_sets do |workout_set_form| %>
+    <div class="field">
+      <%= workout_set_form.label :exercise_id, "Exercise" %>
+      <%= workout_set_form.collection_select :exercise_id, Exercise.all, :id, :name, prompt: true %>
+    </div>
+
+    <div class="field">
+      <%= workout_set_form.label :reps %>
+      <%= workout_set_form.number_field :reps %>
+    </div>
+
+    <div class="field">
+      <%= workout_set_form.label :rest_time %>
+      <%= workout_set_form.number_field :rest_time %>
+    </div>
+  <% end %>
+
+
   <div class="field">
     <%= form.label :notes %>
     <%= form.text_area :notes %>

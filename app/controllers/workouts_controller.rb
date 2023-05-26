@@ -34,8 +34,19 @@ class WorkoutsController < ApplicationController
   end
 
   def new
+    # @user = User.find(params[:user_id])
+    # @workout = Workout.new
+    # @workout.workout_exercises.build
+    # @workout.workout_exercises.first.workout_sets.build
+    #
+    # @user = User.find(params[:user_id])
+    # @workout = @user.workouts.build
+    # @workout.workout_exercises.build
+    # @workout.workout_exercises.each { |we| we.workout_sets.build }
     @user = User.find(params[:user_id])
-    @workout = Workout.new
+    @workout = @user.workouts.build
+    @workout_exercise = @workout.workout_exercises.build
+    @workout_exercise.workout_sets.build
   end
 
   def create
@@ -66,9 +77,34 @@ class WorkoutsController < ApplicationController
 
   private
 
+  # def workout_params
+  #   # Define your permitted workout parameters here
+  #   params.require(:workout).permit(:name, :date, :duration, :notes)
+  # end
+  # def workout_params
+  #   params.require(:workout).permit(
+  #     :date,
+  #     workout_exercises_attributes: [
+  #       :id,
+  #       :exercise_id,
+  #       workout_sets_attributes: [
+  #         :id,
+  #         :reps,
+  #         :weight,
+  #         :rest_time
+  #       ]
+  #     ]
+  #   )
+  # end
   def workout_params
-    # Define your permitted workout parameters here
-    params.require(:workout).permit(:name, :date, :duration, :notes)
+    params.require(:workout).permit(
+      :date,
+      workout_exercises_attributes: [
+        :id,
+        :exercise_id,
+        workout_sets_attributes: [:id, :reps, :weight, :rest_time]
+      ]
+    )
   end
 
   def set_user

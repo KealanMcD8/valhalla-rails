@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_192541) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_213153) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -106,12 +106,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_192541) do
   end
 
   create_table "workout_sets", force: :cascade do |t|
-    t.integer "workout_id"
     t.integer "exercise_id"
     t.integer "reps"
     t.float "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rest_time"
+    t.integer "workout_exercise_id"
+    t.index ["workout_exercise_id"], name: "index_workout_sets_on_workout_exercise_id"
   end
 
   create_table "workouts", force: :cascade do |t|
@@ -136,7 +138,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_192541) do
   add_foreign_key "exercises", "muscle_groups", column: "secondary_muscle_group_ids", on_delete: :nullify
   add_foreign_key "progresses", "users"
   add_foreign_key "progresses", "workouts"
+  add_foreign_key "workout_exercises", "exercises"
   add_foreign_key "workout_exercises", "workouts"
+  add_foreign_key "workout_sets", "workout_exercises"
   add_foreign_key "workouts", "exercises"
   add_foreign_key "workouts", "progresses"
 end
