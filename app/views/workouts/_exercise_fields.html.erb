@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <%= f.label :exercise_id %>
+  <%= f.collection_select :exercise_id, Exercise.all, :id, :name, prompt: 'Select an Exercise', class: 'form-control' %>
+
+  <%= f.label :reps %>
+  <%= f.number_field :reps, class: 'form-control' %>
+
+  <%= f.label :weight %>
+  <%= f.number_field :weight, class: 'form-control' %>
+
+</div>
