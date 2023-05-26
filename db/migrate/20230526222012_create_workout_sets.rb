@@ -1,10 +1,10 @@
 class CreateWorkoutSets < ActiveRecord::Migration[7.0]
   def change
     create_table :workout_sets do |t|
-      t.integer :workout_id
-      t.integer :exercise_id
+      t.references :workout_exercise, foreign_key: true
       t.integer :reps
       t.float :weight
+      t.integer :rest_time
 
       t.timestamps
     end

@@ -31,6 +31,7 @@ class MuscleGroupsController < ApplicationController
 
   def destroy
     @muscle_group = MuscleGroup.find(params[:id])
+
     if @muscle_group.destroy
       redirect_to muscle_groups_path, notice: "Muscle group deleted successfully."
     else
