@@ -1,0 +1,11 @@
+<h2>Edit Muscle Group</h2>
+
+<%= form_with(model: @muscle_group, url: muscle_group_path(@muscle_group), method: :patch) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.submit "Update Muscle Group" %>
+<% end %>

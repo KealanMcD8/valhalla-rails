@@ -1,0 +1,23 @@
+<h2>All Muscle Groups</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @muscle_groups.each do |muscle_group| %>
+      <tr>
+        <td><%= muscle_group.name %></td>
+        <td><%= muscle_group.description %></td>
+        <td><%= link_to "Edit", edit_muscle_group_path(muscle_group) %></td>
+        <td><%= button_to "Delete", muscle_group_path(muscle_group), method: :delete, data: { confirm: "Are you sure you want to delete this muscle group?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Create New Muscle Group", new_muscle_group_path, class: "btn btn-primary" %>

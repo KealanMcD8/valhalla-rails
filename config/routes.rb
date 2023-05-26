@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   # end
   resources :exercises
   resources :equipments
+  resources :muscle_groups
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
