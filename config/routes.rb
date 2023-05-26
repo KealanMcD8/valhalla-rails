@@ -10,12 +10,9 @@ Rails.application.routes.draw do
   # delete 'logout', to: 'sessions#destroy'
   get 'logout', to: 'sessions#destroy'
   resources :users do
-    resource :progress, only: [:show, :edit, :update]
     resources :workouts
   end
-  resources :progresses do
-    resources :workouts, only: [:new, :create]
-  end
+
   # Rails.application.routes.draw do
   #   resources :exercises, only: [:new, :create, :destroy, :index]
   # end

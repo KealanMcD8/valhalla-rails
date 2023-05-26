@@ -25,7 +25,6 @@
 class WorkoutsController < ApplicationController
   before_action :set_user
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
-  before_action :set_progress, only: [:new, :create]
 
   def index
     @workouts = @user.workouts
@@ -35,8 +34,8 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    @progress = Progress.find(params[:progress_id])
-    @workout = @progress.workouts.build
+    @user = User.find(params[:user_id])
+    @workout = Workout.new
   end
 
   def create
@@ -66,14 +65,6 @@ class WorkoutsController < ApplicationController
   end
 
   private
-
-  def set_progress
-    @progress = Progress.find_by(id: params[:progress_id])
-    if @progress.nil?
-      @progress = Progress.new
-      flash.now[:alert] = 'Progress not found.'
-    end
-  end
 
   def workout_params
     # Define your permitted workout parameters here
