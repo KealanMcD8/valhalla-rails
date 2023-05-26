@@ -1,5 +1,13 @@
 <h1>Create Workout</h1>
 
+<%= render 'form' %>
+
+<p>
+  <%= link_to 'Back', user_workouts_path(@user) %>
+</p>
+
+
+<!-->
 <%= form_with(model: [@progress, @workout], url: progress_workouts_path(@progress)) do |form| %>
   <%= form.label :duration %>
   <%= form.number_field :duration %>
@@ -13,3 +21,4 @@
 
   <%= form.submit "Create Workout" %>
 <% end %>
+-->

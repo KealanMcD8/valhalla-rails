@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   resources :users do
     resource :progress, only: [:show, :edit, :update]
+    resources :workouts
   end
   resources :progresses do
     resources :workouts, only: [:new, :create]
