@@ -1,0 +1,8 @@
+<% @equipment.each do |equipment| %>
+  <h3><%= equipment.name %></h3>
+  <p><%= equipment.description %></p>
+  <%= link_to "View", equipment_path(equipment) %>
+  <%= button_to "Delete", equipment_path(equipment), method: :delete, data: { confirm: "Are you sure you want to delete this equipment?" } %><br>
+<% end %>
+
+<%= link_to "Create New Equipment", new_equipment_path, class: "btn btn-primary" %>

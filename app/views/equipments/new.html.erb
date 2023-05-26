@@ -1,0 +1,13 @@
+<h2>Create New Equipment</h2>
+<%= form_with(model: @equipment, url: equipments_path) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :image_url %>
+  <%= form.text_field :image_url %>
+
+  <%= form.submit "Create Equipment" %>
+<% end %>
