@@ -11,7 +11,6 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
     @workout = @user.workouts.build
     @workout_exercise = @workout.workout_exercises.build
     @workout_exercise.workout_sets.build
@@ -51,7 +50,7 @@ class WorkoutsController < ApplicationController
       workout_exercises_attributes: [
         :id,
         :exercise_id,
-        workout_sets_attributes: [:id, :reps, :weight, :rest_time]
+        workout_sets_attributes: [:id, :reps, :weight, :rest_time, :workout_id]
       ]
     )
   end
