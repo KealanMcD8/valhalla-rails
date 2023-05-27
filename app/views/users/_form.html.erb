@@ -1,36 +1,24 @@
-form_with(model: [@user, @workout], url: user_workouts_path(@user), local: true) do |form|
+<%= form_with(model: @user, url: users_path, local: true) do |form| %>
   <%= render 'shared/error_messages' %>
-
   <%= form.label :name %>
   <%= form.text_field :name, class: 'form-control' %>
-
   <%= form.label :email %>
   <%= form.email_field :email, class: 'form-control' %>
-
   <%= form.label :profile_picture %>
   <%= form.text_field :profile_picture, class: 'form-control' %>
-
   <%= form.label :gender %>
   <%= form.select :gender, options_for_select([['Male', 'male'], ['Female', 'female']]) %>
-
-
   <%= form.label :age %>
   <%= form.number_field :age, class: 'form-control', step: 1 %>
-
   <%= form.label :height %>
-  <%= form.number_field :height, class: 'form-control', step: 0.01 %>
-
+  <%= form.number_field :height, class: 'form-control', step: 1 %>
   <%= form.label :weight %>
-  <%= form.number_field :weight, class: 'form-control', step: 0.01 %>
-
+  <%= form.number_field :weight, class: 'form-control', step: 1 %>
   <%= form.label :fitness_level %>
   <%= form.text_field :fitness_level, class: 'form-control' %>
-
   <%= form.label :password %>
   <%= form.password_field :password, class: 'form-control' %>
-
   <%= form.label :password_confirmation %>
   <%= form.password_field :password_confirmation, class: 'form-control' %>
-
   <%= form.submit(@user.new_record? ? "Sign up" : "Update account") %>
 <% end %>
