@@ -20,6 +20,9 @@
 
       <%= ws_form.label :rest_time %>
       <%= ws_form.number_field :rest_time %>
+
+      <!-- Hidden field for workout_id -->
+      <%= ws_form.hidden_field :workout_id, value: @workout.id %>
     <% end %>
   <% end %>
 
