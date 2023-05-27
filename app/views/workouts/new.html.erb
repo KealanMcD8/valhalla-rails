@@ -7,8 +7,8 @@
 
   <!-- WorkoutExercise fields -->
   <%= form.fields_for :workout_exercises do |we_form| %>
-    <%= we_form.label :exercise %>
-    <%= we_form.collection_select :workout_exercise_id, Exercise.all, :id, :name %>
+    <%= we_form.label :exercise_id %>
+    <%= we_form.collection_select :exercise_id, Exercise.all, :id, :name %>
 
     <!-- WorkoutSet fields -->
     <%= we_form.fields_for :workout_sets do |ws_form| %>
@@ -20,6 +20,9 @@
 
       <%= ws_form.label :rest_time %>
       <%= ws_form.number_field :rest_time %>
+
+      <!-- Hidden field for workout_id -->
+      <%= ws_form.hidden_field :workout_id, value: @workout.id %>
     <% end %>
   <% end %>
 

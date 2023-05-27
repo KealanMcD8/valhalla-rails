@@ -13,11 +13,9 @@
     <% @workouts.each do |workout| %>
       <tr>
         <td><%= workout.date %></td>
-        <td><%= workout.duration %> minutes</td>
-        <td><%= workout.notes %></td>
         <td><%= link_to 'Show', user_workout_path(@user, workout) %></td>
         <td><%= link_to 'Edit', edit_user_workout_path(@user, workout) %></td>
-        <td><%= link_to 'Destroy', user_workout_path(@user, workout), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', user_workout_path(@user, workout), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
