@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_27_000435) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_024033) do
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -26,6 +26,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_27_000435) do
     t.datetime "updated_at", null: false
     t.index ["equipment_id"], name: "index_exercise_equipments_on_equipment_id"
     t.index ["exercise_id"], name: "index_exercise_equipments_on_exercise_id"
+  end
+
+  create_table "exercise_secondary_muscle_groups", id: false, force: :cascade do |t|
+    t.integer "exercise_id"
+    t.integer "muscle_group_id"
+    t.index ["exercise_id", "muscle_group_id"], name: "index_exercise_secondary", unique: true
+    t.index ["exercise_id"], name: "index_exercise_secondary_muscle_groups_on_exercise_id"
+    t.index ["muscle_group_id"], name: "index_exercise_secondary_muscle_groups_on_muscle_group_id"
+  end
+
+  create_table "exercise_sets", force: :cascade do |t|
+    t.integer "exercise_exercise_id"
+    t.integer "reps"
+    t.float "weight"
+    t.integer "rest_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "exercises", force: :cascade do |t|

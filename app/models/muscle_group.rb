@@ -1,4 +1,5 @@
 class MuscleGroup < ApplicationRecord
-  # has_and_belongs_to_many :exercises
-  # has_many :workout_sets, through: :exercises
+  has_many :exercises, foreign_key: 'primary_muscle_group_id'
+  has_many :exercise_secondary_muscle_groups
+  has_many :exercises_with_secondary_muscle_group, through: :exercise_secondary_muscle_groups, source: :exercise
 end
