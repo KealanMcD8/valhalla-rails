@@ -1,43 +1,47 @@
-class Mutations::CreateWorkout < GraphQL::Schema::Mutation
-  argument :user_id, ID, required: true
-  argument :date, String, required: true
-  argument :workout_sets_attributes, [Types::WorkoutSetInput], required: true
+module Mutations
+  class CreateWorkout < Mutations::BaseMutation
+    argument :date, GraphQL::Types::ISO8601DateTime, required: true
+    argument :userId, ID, required: true
+    argument :notes, String, required: true
+    argument :workoutExercisesAttributes, [Types::Workout::WorkoutExercise], required: true
 
-  # Other arguments...
+    field :success, Boolean, null: true
+    field :errors, [String], null: false
 
-  field :workout, Types::Workout, null: true
-  field :errors, [String], null: false
+    def resolve(date:, userId:, notes:, workoutExercisesAttributes:)
+      user = User.find(userId)
+      workout = Workout.new(date: date, notes: notes, user: user)
 
-  def resolve(user_id:, date:, workout_sets_attributes:, **other_arguments)
-    workout = Workout.new(user_id: user_id, date: date, **other_arguments)
-
-    workout_sets = []
-
-    ActiveRecord::Base.transaction do
-      # Save the workout
-      workout.save!
-
-      # Create workout sets
-      workout_sets_attributes.each do |set_attributes|
-        exercise = Exercise.find(set_attributes.exercise_id)
-        sets = set_attributes.sets
-        sets.each do |set|
-          workout_set = WorkoutSet.new(
-            reps: set.reps,
-            weight: set.weight,
-            rest_time: set.rest_time,
-            exercise: exercise,
-            workout: workout
-          )
-          workout_set.save!
-          workout_sets << workout_set
-        end
+      if workout.save
+        build_workout_exercises(workout, workoutExercisesAttributes)
+        { success: true, errors: [] }
+      else
+        { success: false, errors: workout.errors.full_messages }
       end
-    rescue ActiveRecord::RecordInvalid => e
-      # Handle validation errors
-      return { workout: nil, errors: e.record.errors.full_messages }
     end
 
-    { workout: workout, errors: [] }
+
+    private
+
+    def build_workout_exercises(workout, workoutExercisesAttributes)
+      workoutExercisesAttributes.each do |exercise_attrs|
+        exercise = Exercise.find(exercise_attrs.exercise_id)
+        workout_exercise = workout.workout_exercises.build(exercise: exercise)
+
+        if workout_exercise.save
+          build_workout_sets(workout, workout_exercise, exercise_attrs.workout_sets_attributes)
+        end
+      end
+    end
+
+    def build_workout_sets(workout, workout_exercise, workout_sets_attributes)
+      workout_sets_attributes.each do |set_attrs|
+        workout_set = workout_exercise.workout_sets.build(set_attrs.to_h)
+        workout_set.workout = workout
+        workout_set.exercise = workout_exercise.exercise
+
+        workout_set.save
+      end
+    end
   end
 end
