@@ -59,6 +59,7 @@ class WorkoutsController < ApplicationController
       :exercise_id,
       exercise_sets_attributes: [
         :id,
+        :exercise_id,
         :reps,
         :weight,
         :rest_time,
