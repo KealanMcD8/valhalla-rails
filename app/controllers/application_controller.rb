@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  def fallback_index_html
+    render file: 'public/index.html'
+  end
 end

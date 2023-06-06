@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/*path' => 'home#index'
   post "/graphql", to: "graphql#execute"
   get 'workouts/new'
   get 'workouts/create'
@@ -24,7 +25,13 @@ Rails.application.routes.draw do
   resources :exercises
   resources :equipments
   resources :muscle_groups
+  # get '/*path' => 'home#index'
+  # get '*path', to: 'home#index'
+  # get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+  #   !request.xhr? && request.format.html?
+  # end
 
+  # get '/app', to: 'react#app'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
