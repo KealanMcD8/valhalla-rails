@@ -5,10 +5,16 @@ class UsersController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show
+    render json: @users
   end
 
   def index
     @users = User.paginate(page: params[:page], per_page: 10)
+    render json: @users
+    # respond_to do |format|
+    #   format.html # Render the index.html.erb view
+    #   format.json { render json: @users }
+    # end
   end
 
   def new
@@ -43,6 +49,7 @@ class UsersController < ApplicationController
     @user.destroy
     session[:user_id] = nil if @user == current_user
     flash[:notice] = "Account and all associated exercises successfully deleted"
+    render json: { message: 'User deleted!' }
   end
 
   private
