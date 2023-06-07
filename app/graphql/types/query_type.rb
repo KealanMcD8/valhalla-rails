@@ -7,6 +7,24 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
+    include Fields::Exercise::List
+    include Fields::Exercise::Find
+
+    include Fields::Equipment::List
+    include Fields::Equipment::Find
+
+    include Fields::MuscleGroup::List
+    include Fields::MuscleGroup::Find
+
+    include Fields::Workouts::List
+    include Fields::Workouts::Find
+
+    include Fields::User::List
+    include Fields::User::Find
+
+    # field :exercises, [Types::ExerciseType], null: false, description: "Returns a list of exercises"
+    # field :create_workout, mutation: Mutations::CreateWorkout
+
     # TODO: remove me
     field :test_field, String, null: false,
       description: "An example field added by the generator"
