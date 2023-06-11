@@ -2,9 +2,11 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@apollo/client": "^3.7.15",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
-    "esbuild": "^0.17.19",
+    "esbuild": "^0.18.0",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
@@ -12,7 +14,7 @@
     "typescript": "^5.1.3"
   },
   "scripts": {
-    "build": "esbuild app/javascript/application.tsx --bundle --sourcemap --outdir=app/assets/builds --public-path=assets --loader:.js=jsx",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "check-types": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput"
   }
