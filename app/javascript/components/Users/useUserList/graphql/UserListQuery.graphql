@@ -1,0 +1,17 @@
+query UserListQuery {
+  userList {
+    edges {
+      node {
+        id
+        age
+        email
+        fitnessLevel
+        gender
+        height
+        name
+        profilePicture
+        weight
+      }
+    }
+  }
+}

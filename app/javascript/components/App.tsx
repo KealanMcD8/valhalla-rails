@@ -1,19 +1,22 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, App } from '@apollo/client';
 import Routes from "../routes";
 
-const client = new ApolloClient({
-  uri: '/graphql', // Replace with your GraphQL API endpoint
-  cache: new InMemoryCache(),
-});
+import client from '../graphql';
+import Home from './Home';
+import Users from './Users';
+
 console.log('test');
+
 function App() {
     return (
         <BrowserRouter >
             <ApolloProvider client={client}>
-                <Routes />
+              <Routes >
+                <Route path="/users" Component={Users} />
+              </Routes>
             </ApolloProvider>
         </BrowserRouter>
     );
